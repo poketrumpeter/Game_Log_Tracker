@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Logs</title>
+</head>
+<body>
+
+<h1 th:text="${Welcoming}">Welcome User Name</h1>
+<h3 th:text="${game}">Assassin's Creed: Valhalla</h3>
+
+<table>
+    <thead>
+    <tr>
+        <th>Games</th>
+        <th>Time Played</th>
+        <th>Last Gaming Session</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr th:if="${games.empty}">
+            <td colspan = "2">No Games Available</td>
+        </tr>
+
+        <tr th:each="Game : ${games}">
+            <td><a th:href="@{/game(game=${Game.getName()})}"><span th:text="${Game.getName()}"></span></a></td>
+        </tr>
+    </tbody>
+
+</table>
+
+<a th:href="@{/addGame(id=${id})}">Add New Game +</a>
+
+</body>
+</html>

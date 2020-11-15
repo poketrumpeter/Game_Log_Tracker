@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Game</title>
+</head>
+<body>
+
+<h1>Add New Game</h1>
+
+<form action="#" th:action="@{/addGame(id=${id})}" th:object="${gameEntry}" method="post">
+    <label for="game_name">Game Name: </label> <br>
+    <input type="text" id="game_name"  th:field="*{name}" name="game_name"> <br>
+
+
+    <input type="checkbox" id="genre1" name="Genre1">
+    <label for="genre1">RPG</label> <br>
+    <input type="checkbox" id="genre2" name="Genre2">
+    <label for="genre2">Multiplayer</label> <br>
+    <input type="checkbox" id="genre3" name="Genre3">
+    <label for="genre3">Simulation</label> <br>
+
+    <input type="submit" value="Add Game">
+</form>
+
+</body>
+</html>
