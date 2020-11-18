@@ -1,9 +1,6 @@
 package com.games.gamelog.games.Controller;
 
-import com.games.gamelog.games.Game;
-import com.games.gamelog.games.User;
-import com.games.gamelog.games.UserRepository;
-import com.games.gamelog.games.defaultGame;
+import com.games.gamelog.games.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -58,6 +55,14 @@ public class GameController{
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String showGame(@RequestParam(value = "game", defaultValue = "") String gameName, Model model){
 
+
+        ArrayList<Genre> genres = new ArrayList<>();
+
+        genres.add(new Genre("RPG"));
+        genres.add(new Genre("Multiplayer"));
+        genres.add(new Genre("Simulation"));
+
+        model.addAttribute("genres", genres);
         model.addAttribute("gameName", gameName);
 
         return "gameHome";
@@ -76,6 +81,8 @@ public class GameController{
     public ModelAndView recordNewGame(@ModelAttribute defaultGame newGame, ModelMap model,
                                       @RequestParam (value = "id") String id){
 
+
+        System.out.println(newGame.getGenre());
         //Add game to mongoDB
         //find the relating User
         ObjectId objectId = new ObjectId(id);

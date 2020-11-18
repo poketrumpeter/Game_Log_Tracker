@@ -13,6 +13,7 @@
     <thead>
     <tr>
         <th>Games</th>
+        <th>Genre</th>
         <th>Time Played</th>
         <th>Last Gaming Session</th>
     </tr>
@@ -25,6 +26,8 @@
 
         <tr th:each="Game : ${games}">
             <td><a th:href="@{/game(game=${Game.getName()})}"><span th:text="${Game.getName()}"></span></a></td>
+            <td><span th:text="${Game.getGenre()}"></span></td>
+            <td><span th:text="${Game.displayTime()}"></span></td>
         </tr>
     </tbody>
 
