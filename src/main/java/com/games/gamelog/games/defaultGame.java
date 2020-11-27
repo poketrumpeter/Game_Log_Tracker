@@ -1,6 +1,9 @@
 package com.games.gamelog.games;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 
 public class defaultGame implements Game{
 
@@ -49,5 +52,28 @@ public class defaultGame implements Game{
         String output = String.format("%d : %d : %d", hour, min, sec);
 
         return output;
+    }
+
+    public void addSession(Session sessionAdd){
+        this.sessions.add(sessionAdd);
+    }
+
+    @Override
+    public String getMostRecentSessionDate(){
+
+        ArrayList<Date> dates = new ArrayList<>();
+
+        if (this.sessions.isEmpty()){
+            return "";
+        }
+
+        for (Session session : this.sessions){
+            dates.add(session.getCurrentDate());
+        }
+
+        Date recentDate = Collections.max(dates);
+
+
+        return ""+recentDate;
     }
 }

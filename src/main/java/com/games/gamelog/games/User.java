@@ -1,5 +1,7 @@
 package com.games.gamelog.games;
 
+import com.games.gamelog.games.Game;
+import com.games.gamelog.games.defaultGame;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -31,27 +33,39 @@ public class User {
         return favoriteGame;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setFavoriteGame(String favoriteGame) {
-        this.favoriteGame = favoriteGame;
-    }
-
     public ArrayList<Game> getGames() {
         return games;
     }
-
-    public void addGame(String gameName, String gameGenre) {
-        this.games.add(new defaultGame(gameName, gameGenre));
-    }
-
+    
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    //Could be factory pattern
+
+    public void addGame(String gameName, String gameGenre) {
+
+        this.games.add(new defaultGame(gameName, gameGenre));
     }
+
+    public Game findGame(String name){
+
+        for(Game game: this.games){
+
+            if (game.getName().equals(name)){
+                return game;
+            }
+
+        }
+
+        return null;
+    }
+
+    public void addSession(Game game, Session newSession){
+
+        //findGame
+        findGame(game.getName()).addSession(newSession);
+
+    }
+
 }

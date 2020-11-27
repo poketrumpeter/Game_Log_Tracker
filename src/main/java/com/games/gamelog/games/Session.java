@@ -1,8 +1,11 @@
 package com.games.gamelog.games;
 
-public class Session {
+import java.util.Date;
 
-    String date;
+interface Session {
 
+    public void displayDate();
+
+    Date getCurrentDate();
 
 }

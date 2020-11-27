@@ -24,10 +24,12 @@
             <td colspan = "2">No Games Available</td>
         </tr>
 
-        <tr th:each="Game : ${games}">
-            <td><a th:href="@{/game(game=${Game.getName()})}"><span th:text="${Game.getName()}"></span></a></td>
-            <td><span th:text="${Game.getGenre()}"></span></td>
-            <td><span th:text="${Game.displayTime()}"></span></td>
+        <tr th:each="game : ${games}">
+            <td><a th:href="@{/game(game=${game.getName()}, id=${id})}"><span th:text="${game.getName()}"></span></a></td>
+            <td><span th:text="${game.getGenre()}"></span></td>
+            <td><span th:text="${game.displayTime()}"></span></td>
+            <td><span th:text="${game.getMostRecentSessionDate()}"></td>
+            <td><a th:href="@{/addSession(game=${game.getName()}, id=${id})}">Add Session +</a></td>
         </tr>
     </tbody>
 
