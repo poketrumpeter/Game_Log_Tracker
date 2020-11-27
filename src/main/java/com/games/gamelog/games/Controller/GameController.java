@@ -59,7 +59,6 @@ public class GameController{
 
         Game currentGame = currentUser.findGame(gameName);
 
-        //System.out.println(currentGame.getName());
         model.addAttribute("currentGame", currentGame);
 
         return "gameHome";
@@ -78,10 +77,6 @@ public class GameController{
     public ModelAndView recordNewGame(@ModelAttribute defaultGame newGame, ModelMap model,
                                       @RequestParam (value = "id") String id){
 
-
-        System.out.println(newGame.getGenre());
-        //Add game to mongoDB
-        //find the relating User
         ObjectId objectId = new ObjectId(id);
 
         User mainUser = repository.findById(objectId);
@@ -108,30 +103,31 @@ public class GameController{
     }
 
     @RequestMapping(value = "/addSession", method = RequestMethod.POST)
-    public ModelAndView addNewSession(@RequestParam(value = "id", defaultValue = "") String id,
-//                                      @RequestParam(value="gameName", defaultValue = "") String gameName,
-                                      @ModelAttribute RPGSession newSession, ModelMap model){
+    public String addNewSession(@RequestParam(value = "id", defaultValue = "") String id,
+                                      @ModelAttribute RPGSession newSession, Model model){
 
-        newSession.displayDate();
-        System.out.println(newSession.getGoals());
 
-        //Add the session data to MongoDB
-        //Find user
+        model.addAttribute("id", id);
+        model.addAttribute("currentSession", newSession);
+
+        return "SessionInfo";
+    }
+
+    @RequestMapping(value = "/session", method = RequestMethod.POST)
+    public ModelAndView sessionCompleted(@RequestParam(value = "id", defaultValue = "") String id,
+                                         @ModelAttribute RPGSession newSession, ModelMap model)
+    {
+
+
         User mainUser = repository.findById(id).get();
-
-        System.out.println(mainUser.getFirstName());
-        System.out.println(newSession.getGameName());
 
         Game updateGame = mainUser.findGame(newSession.getGameName());
 
         mainUser.addSession(updateGame, newSession);
 
-        System.out.println(mainUser.findGame(newSession.getGameName()).getMostRecentSessionDate());
-
         repository.save(mainUser);
 
         model.addAttribute("id", id);
-
         return new ModelAndView("redirect:/", model);
     }
 

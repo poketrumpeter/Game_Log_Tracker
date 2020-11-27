@@ -1,7 +1,6 @@
 package com.games.gamelog.games;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
@@ -10,7 +9,7 @@ public class defaultGame implements Game{
     private String name;
     private String genre;
     private float timePlayed;
-    ArrayList<Session> sessions;
+    ArrayList<GameSession> sessions;
 
     public defaultGame(){}
 
@@ -45,6 +44,11 @@ public class defaultGame implements Game{
         this.timePlayed = timePlayed;
     }
 
+    @Override
+    public ArrayList<GameSession> getSessions() {
+        return this.sessions;
+    }
+
     public String displayTime(){
         int min = (int) (this.timePlayed /60);
         int hour = (int) (this.timePlayed / 120);
@@ -54,7 +58,7 @@ public class defaultGame implements Game{
         return output;
     }
 
-    public void addSession(Session sessionAdd){
+    public void addSession(GameSession sessionAdd){
         this.sessions.add(sessionAdd);
     }
 
@@ -67,7 +71,7 @@ public class defaultGame implements Game{
             return "";
         }
 
-        for (Session session : this.sessions){
+        for (GameSession session : this.sessions){
             dates.add(session.getCurrentDate());
         }
 

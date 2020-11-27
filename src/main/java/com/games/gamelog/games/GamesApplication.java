@@ -11,14 +11,14 @@ public class GamesApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(GamesApplication.class, args);
-
-        User user1 = new User("Gregorio", "Hades", "Figueroa");
-
-        user1.addGame("Hades", "RPG");
-
-        user1.addSession(user1.findGame("Hades"), new RPGSession("Hades"));
-
-        System.out.println(user1.findGame("Hades").getMostRecentSessionDate());
+//
+//        User user1 = new User("Gregorio", "Hades", "Figueroa");
+//
+//        user1.addGame("Hades", "RPG");
+//
+//        user1.addSession(user1.findGame("Hades"), new RPGSession("Hades"));
+//
+//        System.out.println(user1.findGame("Hades").getMostRecentSessionDate());
 
     }
 }

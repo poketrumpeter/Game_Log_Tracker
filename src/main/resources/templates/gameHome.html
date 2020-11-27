@@ -10,5 +10,21 @@
 
     <h3 th:text="'Genre: ' + ${currentGame.getGenre()}"></h3>
 
+    <a th:href="@{/addSession(game=${currentGame.getName()}, id=${id})}">Add Session +</a>
+
+<!--    Display Session Information    -->
+
+    <h2>Sessions</h2>
+    <table>
+        <tr th:each="currentSession: ${currentGame.getSessions()}">
+
+            <h3 th:text="${currentSession.getGameName()}"></h3>
+            <p th:text="${currentSession.getCurrentDate()}"></p>
+
+            <p th:text="${currentSession.displayInfo()}"></p>
+
+            <p th:text="'Session Thoughts: '+ ${currentSession.getReflection()}"></p>
+    </table>
+
 </body>
 </html>

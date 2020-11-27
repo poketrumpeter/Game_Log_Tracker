@@ -1,7 +1,5 @@
 package com.games.gamelog.games;
 
-import com.games.gamelog.games.Game;
-import com.games.gamelog.games.defaultGame;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -61,7 +59,7 @@ public class User {
         return null;
     }
 
-    public void addSession(Game game, Session newSession){
+    public void addSession(Game game, GameSession newSession){
 
         //findGame
         findGame(game.getName()).addSession(newSession);
