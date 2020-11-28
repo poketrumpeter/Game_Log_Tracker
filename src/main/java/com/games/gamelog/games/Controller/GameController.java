@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.websocket.Session;
 import java.util.List;
 
 @Controller
@@ -18,6 +19,8 @@ public class GameController{
 
     @Autowired
     private UserRepository repository;
+
+    private SessionFactory sessionMaker = new SessionFactory();
 
     private static final String welcomeTemplate = "Welcome, %s!";
     private static final String favoriteGame = "Favorite Game: %s";
@@ -60,6 +63,7 @@ public class GameController{
         Game currentGame = currentUser.findGame(gameName);
 
         model.addAttribute("currentGame", currentGame);
+        model.addAttribute("id", id);
 
         return "gameHome";
     }
@@ -95,8 +99,18 @@ public class GameController{
                                    @RequestParam(value = "id", defaultValue = "") String id,
                                    Model model){
 
-        model.addAttribute("gameName", game);
-        model.addAttribute("sessionEntry", new RPGSession(game));
+        ObjectId objectId = new ObjectId(id);
+
+        User mainUser = repository.findById(objectId);
+        Game currentGame = mainUser.findGame(game);
+
+        model.addAttribute("gameName", currentGame.getName());
+        //Use factory
+        GameSession newSession = sessionMaker.createSession(currentGame.getGenre(), currentGame.getName());
+
+        System.out.println(newSession);
+
+        model.addAttribute("sessionEntry", newSession);
         model.addAttribute("id", id);
 
         return "newSession";
@@ -104,21 +118,24 @@ public class GameController{
 
     @RequestMapping(value = "/addSession", method = RequestMethod.POST)
     public String addNewSession(@RequestParam(value = "id", defaultValue = "") String id,
-                                      @ModelAttribute RPGSession newSession, Model model){
+                                      @ModelAttribute GameSession newSession, Model model){
 
 
         model.addAttribute("id", id);
-        model.addAttribute("currentSession", newSession);
 
-        return "SessionInfo";
+        GameSession addSession = sessionMaker.createSession(newSession.getGenre(), newSession.getGameName(),
+                                                        newSession.getCurrentDate(), newSession.getGoals());
+
+        model.addAttribute("currentSession", addSession);
+
+        return getSession(newSession.getGenre());
     }
 
-    @RequestMapping(value = "/session", method = RequestMethod.POST)
+    @RequestMapping(value = "/RPGSession", method = RequestMethod.POST)
     public ModelAndView sessionCompleted(@RequestParam(value = "id", defaultValue = "") String id,
-                                         @ModelAttribute RPGSession newSession, ModelMap model)
-    {
+                                         @ModelAttribute RPGSession newSession, ModelMap model) {
 
-
+        //System.out.println(newSession.getGameName());
         User mainUser = repository.findById(id).get();
 
         Game updateGame = mainUser.findGame(newSession.getGameName());
@@ -131,6 +148,65 @@ public class GameController{
         return new ModelAndView("redirect:/", model);
     }
 
+    @RequestMapping(value = "/MultiplayerSession", method = RequestMethod.POST)
+    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "") String id,
+                                           @RequestParam(value = "game", defaultValue = "") String game,
+                                           @ModelAttribute MultiplayerSession newSession, ModelMap model){
 
+        //System.out.println(newSession.getGameName());
+
+        newSession.setGameName(game);
+
+        User mainUser = repository.findById(id).get();
+
+        Game updateGame = mainUser.findGame(game);
+
+        mainUser.addSession(updateGame, newSession);
+
+        repository.save(mainUser);
+
+
+        model.addAttribute("id", id);
+
+        return new ModelAndView("redirect:/", model);
+    }
+
+    @RequestMapping(value = "/PlatformerSession", method = RequestMethod.POST)
+    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "") String id,
+                                           @RequestParam(value = "game", defaultValue = "") String game,
+                                           @ModelAttribute PlatformerSession newSession, ModelMap model){
+
+        newSession.setGameName(game);
+
+        User mainUser = repository.findById(id).get();
+
+        Game updateGame = mainUser.findGame(game);
+
+        mainUser.addSession(updateGame, newSession);
+
+        repository.save(mainUser);
+
+        model.addAttribute("id", id);
+
+        return new ModelAndView("redirect:/", model);
+    }
+
+
+    public String getSession(String genre){
+
+        switch (genre){
+            case "RPG":
+                return "RPGSessionInfo";
+
+            case "Multiplayer":
+                return "MultiplayerSessionInfo";
+
+            case "Platformer":
+                return "PlatformerSessionInfo";
+
+            default:
+                return null;
+        }
+    }
 
 }

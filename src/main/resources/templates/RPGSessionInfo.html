@@ -10,12 +10,13 @@
 <h1 th:text="'You are currently playing ' + ${currentSession.getGameName()}"></h1>
 <h3 th:text="'Date: ' + ${currentSession.getCurrentDate()}"></h3>
 
-<p th:text="'Your goals for this session are: ' + ${currentSession.goals}"></p>
+<p th:text="'Your goals for this session are: ' + ${currentSession.getGoals()}"></p>
 
-<form action="/session" th:action="@{/session(id=${id})}" th:object="${currentSession}" method="post">
+<form action="/session" th:action="@{/RPGSession(id=${id}, game=${currentSession.getGameName()})}" th:object="${currentSession}" method="post">
 
     <input type="hidden" th:field="*{currentDate}" th:value="${currentSession.getCurrentDate()}">
     <input type="hidden" th:field="*{gameName}" th:value="${currentSession.getGameName()}">
+    <input type="hidden" th:field="*{genre}" th:value="${currentSession.getGenre()}">
     <input type="hidden" th:field="*{goals}" th:value="${currentSession.getGoals()}">
 
     <table id="questsInput">

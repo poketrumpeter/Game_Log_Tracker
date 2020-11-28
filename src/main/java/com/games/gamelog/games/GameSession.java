@@ -8,6 +8,10 @@ public interface GameSession {
 
     public String getReflection();
 
+    public String getGoals();
+
+    public String getGenre();
+
     Date getCurrentDate();
 
     public void displayDate();

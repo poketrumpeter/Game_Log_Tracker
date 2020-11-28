@@ -13,6 +13,8 @@
 <form action="#" th:action="@{/addSession(id=${id})}" th:object="${sessionEntry}" method="post">
 
     <input type="hidden" th:value="${sessionEntry.getGameName()}" th:field="*{gameName}">
+    <input type="hidden" th:value="${sessionEntry.getCurrentDate()}" th:field="*{currentDate}">
+    <input type="hidden" th:value="${sessionEntry.getGenre()}" th:field="*{genre}">
 
 <!--    Time input area-->
 
