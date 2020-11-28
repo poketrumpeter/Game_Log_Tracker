@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/SessionScript.js}"></script>
+</head>
+<body>
+
+<h1 th:text="'You are currently playing ' + ${currentSession.getGameName()}"></h1>
+<h3 th:text="'Date: ' + ${currentSession.getCurrentDate()}"></h3>
+
+<p th:text="'Your goals for this session are: ' + ${currentSession.getGoals()}"></p>
+
+<form action="/session" th:action="@{/RPGSession(id=${id}, game=${currentSession.getGameName()})}" th:object="${currentSession}" method="post">
+
+    <input type="hidden" th:field="*{currentDate}" th:value="${currentSession.getCurrentDate()}">
+    <input type="hidden" th:field="*{gameName}" th:value="${currentSession.getGameName()}">
+    <input type="hidden" th:field="*{genre}" th:value="${currentSession.getGenre()}">
+    <input type="hidden" th:field="*{goals}" th:value="${currentSession.getGoals()}">
+
+    <table id="questsInput">
+        <tr th:each="quest,status: ${currentSession.quests}" id="questRow">
+
+            <input th:field = "*{quests[__${status.index}__].questName}" th:value="${quest.getQuestName()}">
+            <input th:field = "*{quests[__${status.index}__].questDescription}" th:value="${quest.getQuestDescription()}">
+
+            <br>
+        </tr>
+    </table>
+
+    <input type="button" onclick="addQuestInput()" value="Add Quest">
+
+    <br>
+
+    <label>Please give your thoughts on this Game Session</label>
+    <br>
+    <textarea th:field="*{reflection}">
+
+    </textarea>
+
+    <br>
+    <br>
+    <input type="submit" value="Finish Session">
+</form>
+
+
+</body>
+</html>

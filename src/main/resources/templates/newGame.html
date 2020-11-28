@@ -12,13 +12,17 @@
     <label for="game_name">Game Name: </label> <br>
     <input type="text" id="game_name"  th:field="*{name}" name="game_name"> <br>
 
+    <div>
+        <input type="radio" id="RPG" name = "RPG" value = "RPG" th:field="*{genre}">
+        <label for="RPG">RPG</label>
 
-    <input type="checkbox" id="genre1" name="Genre1">
-    <label for="genre1">RPG</label> <br>
-    <input type="checkbox" id="genre2" name="Genre2">
-    <label for="genre2">Multiplayer</label> <br>
-    <input type="checkbox" id="genre3" name="Genre3">
-    <label for="genre3">Simulation</label> <br>
+        <input type="radio" id="Multiplayer" name = "Multiplayer" value="Multiplayer" th:field="*{genre}">
+        <label for="Multiplayer">Multiplayer</label>
+
+        <input type="radio" id="Platformer" name="Platformer" value="Platformer" th:field = "*{genre}">
+        <label for="Platformer">Platformer</label>
+    </div>
+
 
     <input type="submit" value="Add Game">
 </form>

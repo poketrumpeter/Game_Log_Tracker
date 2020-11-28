@@ -2,11 +2,29 @@
 <html lang="en" xmlns:th = "https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${gameName}">Title</title>
+    <title th:text="${currentGame.getName()}">Title</title>
 </head>
 <body>
 
-    <h1 th:text="${gameName}">z.xnlda.m</h1>
+    <h1 th:text="${currentGame.getName()}"></h1>
+
+    <h3 th:text="'Genre: ' + ${currentGame.getGenre()}"></h3>
+
+    <a th:href="@{/addSession(game=${currentGame.getName()}, id=${id})}">Add Session +</a>
+
+<!--    Display Session Information    -->
+
+    <h2>Sessions</h2>
+    <table>
+        <tr th:each="currentSession: ${currentGame.getSessions()}">
+
+            <h3 th:text="${currentSession.getGameName()}"></h3>
+            <p th:text="${currentSession.getCurrentDate()}"></p>
+
+            <p th:text="${currentSession.displayInfo()}"></p>
+
+            <p th:text="'Session Thoughts: '+ ${currentSession.getReflection()}"></p>
+    </table>
 
 </body>
 </html>

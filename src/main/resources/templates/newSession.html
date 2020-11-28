@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<h1>Create new game Session</h1>
+
+<h3 th:text="${sessionEntry.getGameName()}"></h3>
+
+<form action="#" th:action="@{/addSession(id=${id})}" th:object="${sessionEntry}" method="post">
+
+    <input type="hidden" th:value="${sessionEntry.getGameName()}" th:field="*{gameName}">
+    <input type="hidden" th:value="${sessionEntry.getCurrentDate()}" th:field="*{currentDate}">
+    <input type="hidden" th:value="${sessionEntry.getGenre()}" th:field="*{genre}">
+
+<!--    Time input area-->
+
+<!--    Goals input-->
+    <label>Please Enter Goals for the Session</label>
+    <br>
+    <textarea id="goals" th:field="*{goals}">
+
+    </textarea>
+
+    <br>
+
+    <input type="submit" value="Create Session">
+
+</form>
 
 </body>
 </html>

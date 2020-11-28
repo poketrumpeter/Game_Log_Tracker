@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/MultiplayerSession.js}"></script>
+</head>
+<body>
+
+    <h1 th:text="'You are currently playing ' + ${currentSession.getGameName()}"></h1>
+    <h3 th:text="'Date: ' + ${currentSession.getCurrentDate()}"></h3>
+
+    <p th:text="'Your goals for this session are: ' + ${currentSession.getGoals()}"></p>
+
+    <form action="/session" th:action="@{/MultiplayerSession(id=${id}, game=${currentSession.getGameName()})}" th:object="${currentSession}" method="post">
+
+        <input type="hidden" th:field="*{currentDate}" th:value="${currentSession.getCurrentDate()}">
+        <input type="hidden" th:field="*{genre}" th:value="${currentSession.getGenre()}">
+        <input type="hidden" th:field="*{goals}" th:value="${currentSession.getGoals()}">
+
+        <table id="statsTable">
+
+<!--            <tr th:each="match,status: ${currentSession.matches}">-->
+
+<!--                <input th:field = "*{matches[__${status.index}__].kills}" th:value="${match.getKills()}">-->
+
+<!--                <input th:field = "*{matches[__${status.index}__].deaths}" th:value="${match.getDeaths()}">-->
+
+<!--                <br>-->
+<!--            </tr>-->
+        </table>
+
+        <br>
+        <input type="button" onclick="addMatchInput()" value=" Add Stats">
+        <br>
+        <br>
+        <label>What are some things I can do better</label>
+        <br>
+        <textarea th:field="*{improvements}">
+
+        </textarea>
+
+        <br>
+        <br>
+
+        <label>Please give your thoughts on this Game Session</label>
+        <br>
+        <textarea th:field="*{reflection}">
+
+        </textarea>
+
+        <br>
+        <input type="submit" value="Complete Session">
+
+    </form>
+</body>
+</html>
