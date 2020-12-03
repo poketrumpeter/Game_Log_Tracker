@@ -1,0 +1,33 @@
+body {
+    background-color: lightskyblue;
+    /*background-image: url(/images/video-games-icon.png);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    text-align: center;
+    background-attachment: fixed;*/
+}
+* {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-family: verdana, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}

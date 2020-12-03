@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Game Logs</title>
+    <link th:href="@{css/homepagestylesheet.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -28,7 +29,7 @@
             <td><a th:href="@{/game(game=${game.getName()}, id=${id})}"><span th:text="${game.getName()}"></span></a></td>
             <td><span th:text="${game.getGenre()}"></span></td>
             <td><span th:text="${game.displayTime()}"></span></td>
-            <td><span th:text="${game.getMostRecentSessionDate()}"></td>
+            <td><span th:text="${game.getMostRecentSessionDate()}"></span></td>
             <td><a th:href="@{/addSession(game=${game.getName()}, id=${id})}">Add Session +</a></td>
         </tr>
     </tbody>

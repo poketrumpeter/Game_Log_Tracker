@@ -1,0 +1,18 @@
+body {
+    background-color: lightblue;
+    background-image: url(/images/rpg-icon.png);
+    background-position: right bottom;
+}
+
+* {
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+p {
+    font-family: verdana, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
