@@ -21,17 +21,22 @@ public class GameController{
     List<Game> games;
 
     @Autowired
+
+    //Create a new repo
     private UserRepository repository;
 
+    //Create the session factory
     private SessionFactory sessionMaker = new SessionFactory();
 
     private static final String welcomeTemplate = "Welcome, %s!";
     private static final String favoriteGame = "Favorite Game: %s";
 
+    //This is to request the ObjectID/User ID in the web search bar in localhost:8080
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827")
                                         String id, Model model){
 
+        //Pull information from the given ObjectID
         User mainUser;
         ObjectId objectId = new ObjectId(id);
         if(repository.findById(objectId) != null){
@@ -41,6 +46,7 @@ public class GameController{
             mainUser = new User("User Name", "Game", "User");
         }
 
+        //Pull games saved in this user's database collection
         games = mainUser.getGames();
 
         //Display name and favorite game from user member
@@ -56,6 +62,7 @@ public class GameController{
 
     }
 
+    //Show the game session information
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String showGame(@RequestParam(value = "game", defaultValue = "") String gameName,
                            @RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
@@ -71,6 +78,7 @@ public class GameController{
         return "gameHome";
     }
 
+    //Add a new game for the specific user
     @RequestMapping(value = "/addGame", method = RequestMethod.GET)
     public String showGameForm(@RequestParam(value = "id")String id, Model model){
 
@@ -80,6 +88,7 @@ public class GameController{
     }
 
 
+    //Pushes the new game information to the MongoDB
     @RequestMapping(value = "/addGame",  method = RequestMethod.POST)
     public ModelAndView recordNewGame(@ModelAttribute defaultGame newGame, ModelMap model,
                                       @RequestParam (value = "id") String id){
@@ -97,6 +106,7 @@ public class GameController{
         return new ModelAndView("redirect:/", model);
     }
 
+    //Adds a new game session for the specific user
     @RequestMapping(value = "/addSession", method = RequestMethod.GET)
     public String createNewSession(@RequestParam(value = "game", defaultValue = "") String game,
                                    @RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
@@ -119,6 +129,7 @@ public class GameController{
         return "newSession";
     }
 
+    //Pushes the new game session information to the MongoDB
     @RequestMapping(value = "/addSession", method = RequestMethod.POST)
     public String addNewSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                       @ModelAttribute GameSession newSession, Model model){
@@ -134,6 +145,7 @@ public class GameController{
         return getSession(newSession.getGenre());
     }
 
+    //Pushes the new RPG session information to the MongoDB
     @RequestMapping(value = "/RPGSession", method = RequestMethod.POST)
     public ModelAndView sessionCompleted(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                          @ModelAttribute RPGSession newSession, ModelMap model) {
@@ -153,6 +165,7 @@ public class GameController{
         return new ModelAndView("redirect:/", model);
     }
 
+    //Pushes the new multiplayer session information to the MongoDB
     @RequestMapping(value = "/MultiplayerSession", method = RequestMethod.POST)
     public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                            @RequestParam(value = "game", defaultValue = "") String game,
@@ -181,6 +194,7 @@ public class GameController{
         return new ModelAndView("redirect:/", model);
     }
 
+    //Pushes the new platformer session information to the MongoDB
     @RequestMapping(value = "/PlatformerSession", method = RequestMethod.POST)
     public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                            @RequestParam(value = "game", defaultValue = "") String game,
@@ -202,7 +216,7 @@ public class GameController{
         return new ModelAndView("redirect:/", model);
     }
 
-
+    //Retrieves a game session information to the MongoDB
     public String getSession(String genre){
 
         switch (genre){
