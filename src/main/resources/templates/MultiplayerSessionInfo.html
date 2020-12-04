@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" th:src="@{/MultiplayerSession.js}"></script>
+    <link th:href="@{css/mystylesheet.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -18,7 +19,7 @@
         <input type="hidden" th:field="*{genre}" th:value="${currentSession.getGenre()}">
         <input type="hidden" th:field="*{goals}" th:value="${currentSession.getGoals()}">
 
-        <table id="statsTable">
+        <table id="statsTable" th:class="stats">
 
 <!--            <tr th:each="match,status: ${currentSession.matches}">-->
 
@@ -31,12 +32,12 @@
         </table>
 
         <br>
-        <input type="button" onclick="addMatchInput()" value=" Add Stats">
+        <input type="button" onclick="addMatchInput()" value=" Add Stats" th:class="button2">
         <br>
         <br>
         <label>What are some things I can do better</label>
         <br>
-        <textarea th:field="*{improvements}">
+        <textarea th:field="*{improvements}" rows="5" cols="50">
 
         </textarea>
 
@@ -45,12 +46,12 @@
 
         <label>Please give your thoughts on this Game Session</label>
         <br>
-        <textarea th:field="*{reflection}">
+        <textarea th:field="*{reflection}" rows="5" cols="50">
 
         </textarea>
 
         <br>
-        <input type="submit" value="Complete Session">
+        <input type="submit" value="Complete Session" th:class="button2">
 
     </form>
 </body>

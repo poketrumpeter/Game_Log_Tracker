@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New Game</title>
+    <link th:href="@{css/mystylesheet.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -10,21 +11,21 @@
 
 <form action="#" th:action="@{/addGame(id=${id})}" th:object="${gameEntry}" method="post">
     <label for="game_name">Game Name: </label> <br>
-    <input type="text" id="game_name"  th:field="*{name}" name="game_name"> <br>
+    <input type="text" id="game_name"  th:field="*{name}" name="game_name" rows="1" cols="20"> <br>
 
     <div>
-        <input type="radio" id="RPG" name = "RPG" value = "RPG" th:field="*{genre}">
+        <input type="radio" id="RPG" name = "RPG" value = "RPG" th:field="*{genre}" th:class="radio">
         <label for="RPG">RPG</label>
 
-        <input type="radio" id="Multiplayer" name = "Multiplayer" value="Multiplayer" th:field="*{genre}">
+        <input type="radio" id="Multiplayer" name = "Multiplayer" value="Multiplayer" th:field="*{genre}" th:class="radio">
         <label for="Multiplayer">Multiplayer</label>
 
-        <input type="radio" id="Platformer" name="Platformer" value="Platformer" th:field = "*{genre}">
+        <input type="radio" id="Platformer" name="Platformer" value="Platformer" th:field = "*{genre}" th:class="radio">
         <label for="Platformer">Platformer</label>
     </div>
 
 
-    <input type="submit" value="Add Game">
+    <input type="submit" value="Add Game" th:class="button1">
 </form>
 
 </body>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{css/mystylesheet.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -21,13 +22,13 @@
 <!--    Goals input-->
     <label>Please Enter Goals for the Session</label>
     <br>
-    <textarea id="goals" th:field="*{goals}">
+    <textarea id="goals" th:field="*{goals}" rows="5" cols="50">
 
     </textarea>
 
     <br>
 
-    <input type="submit" value="Create Session">
+    <input type="submit" value="Create Session" th:class="button2">
 
 </form>
 
