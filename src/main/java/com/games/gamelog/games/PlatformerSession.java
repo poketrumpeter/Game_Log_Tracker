@@ -1,5 +1,7 @@
 package com.games.gamelog.games;
 
+import com.games.gamelog.games.displays.PlatformerDisplay;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,15 +11,15 @@ public class PlatformerSession extends DefaultSession{
     ArrayList<Level> levels;
 
     public PlatformerSession() {
-        super("", "Platformer");
+        super("", "Platformer", new PlatformerDisplay(new ArrayList<>()));
     }
 
     public PlatformerSession(String gameName) {
-        super(gameName, "Platformer");
+        super(gameName, "Platformer", new PlatformerDisplay(new ArrayList<>()));
     }
 
     public PlatformerSession(String gameName, Date date, String goals) {
-        super(gameName, "Platformer");
+        super(gameName, "Platformer", new PlatformerDisplay(new ArrayList<>()));
     }
 
     public ArrayList<Level> getLevels() {
@@ -28,21 +30,5 @@ public class PlatformerSession extends DefaultSession{
         this.levels = levels;
     }
 
-    @Override
-    public String displayInfo() {
 
-        String output = "Levels Completed: ";
-
-        for(Level level : levels){
-            if(levels.indexOf(level) == levels.size()-1){
-                output += "Level #: " + level.levelNumber +" Completion Time: " + level.completionTime +
-                          " Score: " + level.score;
-                break;
-            }
-            output += "Level #: " + level.levelNumber +" Completion Time: " + level.completionTime +
-                    " Score: " + level.score + " | ";
-        }
-
-        return output;
-    }
 }

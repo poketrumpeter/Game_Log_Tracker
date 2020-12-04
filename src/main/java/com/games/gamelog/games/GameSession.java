@@ -10,12 +10,12 @@ public interface GameSession {
 
     public String getGoals();
 
-    public String getGenre();
+    String getGenre();
 
     Date getCurrentDate();
 
     public void displayDate();
 
-    public String displayInfo();
+    String displayInfo();
 
 }

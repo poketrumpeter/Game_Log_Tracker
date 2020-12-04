@@ -1,6 +1,9 @@
 package com.games.gamelog.games.Controller;
 
 import com.games.gamelog.games.*;
+import com.games.gamelog.games.displays.MultiplayerDisplay;
+import com.games.gamelog.games.displays.PlatformerDisplay;
+import com.games.gamelog.games.displays.RPGDisplay;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +29,7 @@ public class GameController{
     private static final String favoriteGame = "Favorite Game: %s";
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcome(@RequestParam(value = "id", defaultValue = "00000000000000000000000")
+    public String welcome(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827")
                                         String id, Model model){
 
         User mainUser;
@@ -55,7 +58,7 @@ public class GameController{
 
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String showGame(@RequestParam(value = "game", defaultValue = "") String gameName,
-                           @RequestParam(value = "id", defaultValue = "00000000000000000000000") String id,
+                           @RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                            Model model){
 
         User currentUser = repository.findById(id).get();
@@ -96,7 +99,7 @@ public class GameController{
 
     @RequestMapping(value = "/addSession", method = RequestMethod.GET)
     public String createNewSession(@RequestParam(value = "game", defaultValue = "") String game,
-                                   @RequestParam(value = "id", defaultValue = "") String id,
+                                   @RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                    Model model){
 
         ObjectId objectId = new ObjectId(id);
@@ -117,7 +120,7 @@ public class GameController{
     }
 
     @RequestMapping(value = "/addSession", method = RequestMethod.POST)
-    public String addNewSession(@RequestParam(value = "id", defaultValue = "") String id,
+    public String addNewSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                       @ModelAttribute GameSession newSession, Model model){
 
 
@@ -132,8 +135,10 @@ public class GameController{
     }
 
     @RequestMapping(value = "/RPGSession", method = RequestMethod.POST)
-    public ModelAndView sessionCompleted(@RequestParam(value = "id", defaultValue = "") String id,
+    public ModelAndView sessionCompleted(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                          @ModelAttribute RPGSession newSession, ModelMap model) {
+
+        newSession.setDisplay(new RPGDisplay(newSession.getQuests()));
 
         //System.out.println(newSession.getGameName());
         User mainUser = repository.findById(id).get();
@@ -149,11 +154,12 @@ public class GameController{
     }
 
     @RequestMapping(value = "/MultiplayerSession", method = RequestMethod.POST)
-    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "") String id,
+    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                            @RequestParam(value = "game", defaultValue = "") String game,
                                            @ModelAttribute MultiplayerSession newSession, ModelMap model){
 
         //System.out.println(newSession.getGameName());
+        newSession.setDisplay(new MultiplayerDisplay(newSession.getMatches(), newSession.getImprovements()));
 
         newSession.setGameName(game);
 
@@ -172,10 +178,11 @@ public class GameController{
     }
 
     @RequestMapping(value = "/PlatformerSession", method = RequestMethod.POST)
-    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "") String id,
+    public ModelAndView completeRPGSession(@RequestParam(value = "id", defaultValue = "5fbfdaed2253a51a9cecb827") String id,
                                            @RequestParam(value = "game", defaultValue = "") String game,
                                            @ModelAttribute PlatformerSession newSession, ModelMap model){
 
+        newSession.setDisplay(new PlatformerDisplay(newSession.getLevels()));
         newSession.setGameName(game);
 
         User mainUser = repository.findById(id).get();
