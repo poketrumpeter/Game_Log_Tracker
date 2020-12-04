@@ -14,6 +14,8 @@ public interface GameSession {
 
     Date getCurrentDate();
 
+    public String getSessionTime();
+
     public void displayDate();
 
     String displayInfo();
