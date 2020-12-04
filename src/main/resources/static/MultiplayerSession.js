@@ -1,12 +1,12 @@
 function addMatchInput(){
 
     var table = document.getElementById("statsTable");
-    var rows = table.rows.length
+    var rows = table.rows.length;
 
-    var newMatch = document.createElement("tr")
+    var newMatch = document.createElement("tr");
 
     newMatch.innerHTML = "<label>Match Kills</label> \n"
-    newMatch.innerHTML += "<input id='matches" + rows + ".kills' name='matches["+rows+"].kills'> \n"
+    newMatch.innerHTML += "<input id='matches" + rows + ".kills' name='matches["+rows+"].kills' > \n"
     newMatch.innerHTML += "<br>"
     newMatch.innerHTML += "<label>Match Deaths</label> \n"
     newMatch.innerHTML += "<input id='matches" + rows + ".deaths' name='matches["+rows+"].deaths'> \n"
@@ -20,10 +20,12 @@ function addMatchInput(){
     newMatch.innerHTML += "<label for='matches["+rows+"].victory'>Loss</label> \n"
     newMatch.innerHTML += "</div>"
 
+
     console.log(newMatch);
 
-    table.appendChild(newMatch)
-    table.appendChild(document.createElement("br"))
+    table.appendChild(newMatch);
+    table.appendChild(document.createElement("br"));
+
 
 
 }
