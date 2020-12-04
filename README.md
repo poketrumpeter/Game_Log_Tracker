@@ -42,3 +42,6 @@ Step 7) The project should be up and running on your browser! Test it out!
 1. mongo and mongod installation (version 4.4)
 2. IntelliJ (version 2020.2.1), terminal, or other IDE to run the program
 3. A supported browser
+
+### Demo Link
+Final Project Video Demo: https://drive.google.com/file/d/15xkNZoheZbY1gNYjsS7a4OZaXvQZC3y5/view?usp=sharing
