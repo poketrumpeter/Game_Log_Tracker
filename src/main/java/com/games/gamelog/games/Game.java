@@ -10,6 +10,8 @@ public interface Game {
 
     ArrayList<GameSession> getSessions();
 
+    public String displayTime();
+
     public void addSession(GameSession sessionAdd);
 
     public String getMostRecentSessionDate();

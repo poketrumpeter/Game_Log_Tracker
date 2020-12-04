@@ -154,6 +154,7 @@ public class GameController{
                                            @ModelAttribute MultiplayerSession newSession, ModelMap model){
 
         //System.out.println(newSession.getGameName());
+        System.out.println(newSession.getSessionTime());
 
         newSession.setGameName(game);
 

@@ -12,7 +12,7 @@
 
 <p th:text="'Your goals for this session are: ' + ${currentSession.getGoals()}"></p>
 
-<form action="/session" th:action="@{/RPGSession(id=${id}, game=${currentSession.getGameName()})}" th:object="${currentSession}" method="post">
+<form action="/session" id="RPGForm" th:action="@{/RPGSession(id=${id}, game=${currentSession.getGameName()})}" th:object="${currentSession}" method="post">
 
     <input type="hidden" th:field="*{currentDate}" th:value="${currentSession.getCurrentDate()}">
     <input type="hidden" th:field="*{gameName}" th:value="${currentSession.getGameName()}">
@@ -41,9 +41,46 @@
 
     <br>
     <br>
-    <input type="submit" value="Finish Session">
-</form>
+    <input type="submit" onclick="sendTime()" value="Complete Session">
 
+</form>
+<p id="timer"></p>
+<label id="time">Time Played</label>: <label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
+<!--    Countup timer-->
+<script>
+    var hoursLabel = document.getElementById("hours");
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+    var timedOut = false;
+    function pad(num) {
+        var numString = num + "";
+        if (numString.length <= 1) {
+            return "0" + numString;
+        } else {
+            return numString;
+        }
+    }
+
+    function sendTime() {
+        timedOut = !timedOut;
+        var stringTime = totalSeconds.toString();
+        var form = document.getElementById("RPGForm");
+        var recordTime = document.createElement("div");
+        recordTime.innerHTML = "<input type='hidden' id='sessionTime' name='sessionTime' value="+stringTime +">";
+        form.insertBefore(recordTime, form.firstChild);
+    }
+
+    function setTime() {
+        if(!timedOut){
+            totalSeconds++;
+        }
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60 % 60));
+        hoursLabel.innerHTML = pad(parseInt(totalSeconds/ 3600));
+    }
+</script>
 
 </body>
 </html>

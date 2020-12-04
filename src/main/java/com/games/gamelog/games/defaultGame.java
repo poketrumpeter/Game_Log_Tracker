@@ -8,7 +8,7 @@ public class defaultGame implements Game{
 
     private String name;
     private String genre;
-    private float timePlayed;
+    private int timePlayed;
     ArrayList<GameSession> sessions;
 
     public defaultGame(){}
@@ -36,11 +36,11 @@ public class defaultGame implements Game{
         this.genre = genre;
     }
 
-    public float getTimePlayed() {
+    public int getTimePlayed() {
         return timePlayed;
     }
 
-    public void setTimePlayed(float timePlayed) {
+    public void setTimePlayed(int timePlayed) {
         this.timePlayed = timePlayed;
     }
 
@@ -49,9 +49,21 @@ public class defaultGame implements Game{
         return this.sessions;
     }
 
+
+    public void calculateTime(){
+        int sum = 0;
+        for(int i = 0; i < sessions.size();i++){
+            String stringSessionTime = sessions.get(i).getSessionTime();
+            int intSessionTime = Integer.parseInt(stringSessionTime);
+            sum = sum + intSessionTime;
+        }
+        setTimePlayed(sum);
+    }
+
     public String displayTime(){
-        int min = (int) (this.timePlayed /60);
-        int hour = (int) (this.timePlayed / 120);
+        calculateTime();
+        int min = (int) (this.timePlayed /60 % 60);
+        int hour = (int) (this.timePlayed / 3600);
         int sec = (int) (this.timePlayed % 60);
         String output = String.format("%d : %d : %d", hour, min, sec);
 

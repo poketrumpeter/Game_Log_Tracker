@@ -57,6 +57,14 @@ public abstract class DefaultSession implements GameSession {
         this.reflection = reflection;
     }
 
+    public void setSessionTime(String time) {
+        this.sessionTime = time;
+    }
+
+    public String getSessionTime(){
+        return sessionTime;
+    }
+
     @Override
     public String getGenre() {
         return genre;
@@ -67,6 +75,5 @@ public abstract class DefaultSession implements GameSession {
         String dateDisplay = "" + this.currentDate;
         System.out.println(dateDisplay);
     }
-
 
 }
