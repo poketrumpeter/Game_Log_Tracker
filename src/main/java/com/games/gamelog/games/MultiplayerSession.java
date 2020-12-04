@@ -1,5 +1,9 @@
 package com.games.gamelog.games;
 
+import com.games.gamelog.games.displays.MultiplayerDisplay;
+import com.games.gamelog.games.displays.PlatformerDisplay;
+import com.sun.org.apache.xpath.internal.operations.Mult;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,15 +14,15 @@ public class MultiplayerSession extends DefaultSession{
     String improvements;
 
     public MultiplayerSession() {
-        super("", "Multiplayer");
+        super("", "Multiplayer", new MultiplayerDisplay(new ArrayList<>(), ""));
     }
 
     public MultiplayerSession(String gameName) {
-        super(gameName, "Multiplayer");
+        super(gameName, "Multiplayer", new MultiplayerDisplay(new ArrayList<>(), ""));
     }
 
     public MultiplayerSession(String gameName, Date date, String goals) {
-        super(gameName, "Multiplayer");
+        super(gameName, "Multiplayer", new MultiplayerDisplay(new ArrayList<>(), ""));
         setCurrentDate(date);
         setGoals(goals);
     }
@@ -41,31 +45,6 @@ public class MultiplayerSession extends DefaultSession{
 
     public void setImprovements(String improvements) {
         this.improvements = improvements;
-    }
-
-    @Override
-    public String displayInfo() {
-
-        String output = "Areas to Improve: " + improvements + " Match stats: ";
-        String outcome = "";
-
-        for(MultiplayerMatch match : matches){
-            if(match.victory)
-                outcome = "Victory";
-            else
-                outcome = "Defeat";
-
-            int KDA = (Integer.parseInt(match.kills) + Integer.parseInt(match.assists)) / Integer.parseInt(match.deaths);
-
-            if(matches.indexOf(match) == matches.size()-1){
-                output += "KDA: " + KDA + " - " + outcome;
-                break;
-            }
-            output += "KDA " + KDA + " - " + outcome + "|";
-
-
-        }
-        return output;
     }
 
 }

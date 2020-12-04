@@ -1,5 +1,7 @@
 package com.games.gamelog.games;
 
+import com.games.gamelog.games.displays.GameDisplays;
+
 import java.util.Date;
 
 public abstract class DefaultSession implements GameSession {
@@ -9,17 +11,19 @@ public abstract class DefaultSession implements GameSession {
     String goals;
     String gameName;
     String genre;
+    GameDisplays display;
 
     //Personal Thoughts
     String reflection;
 
-    public DefaultSession(String gameName, String genre) {
+    public DefaultSession(String gameName, String genre, GameDisplays display) {
         currentDate = new Date();
         sessionTime = "0";
         goals = "";
         reflection = "";
         this.gameName = gameName;
         this.genre = genre;
+        this.display = display;
     }
 
     @Override
@@ -62,11 +66,23 @@ public abstract class DefaultSession implements GameSession {
         return genre;
     }
 
+
+    public GameDisplays getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(GameDisplays display) {
+        this.display = display;
+    }
+
     @Override
     public void displayDate() {
         String dateDisplay = "" + this.currentDate;
         System.out.println(dateDisplay);
     }
 
-
+    @Override
+    public String displayInfo() {
+        return this.display.displayInfo();
+    }
 }
