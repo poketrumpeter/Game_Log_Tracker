@@ -10,7 +10,7 @@ public interface GameSession {
 
     public String getGoals();
 
-    public String getGenre();
+    String getGenre();
 
     Date getCurrentDate();
 
@@ -18,6 +18,6 @@ public interface GameSession {
 
     public void displayDate();
 
-    public String displayInfo();
+    String displayInfo();
 
 }

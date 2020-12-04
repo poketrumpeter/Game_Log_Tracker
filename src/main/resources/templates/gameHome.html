@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${currentGame.getName()}">Title</title>
+    <!--<link rel="stylesheet" th:href="@{/homepagestylesheet.css}"/>-->
+    <link th:href="@{css/mystylesheet.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -10,12 +12,12 @@
 
     <h3 th:text="'Genre: ' + ${currentGame.getGenre()}"></h3>
 
-    <a th:href="@{/addSession(game=${currentGame.getName()}, id=${id})}">Add Session +</a>
+    <a th:href="@{/addSession(game=${currentGame.getName()}, id=${id})}" th:class="button3">Add Session</a>
 
 <!--    Display Session Information    -->
 
     <h2>Sessions</h2>
-    <table>
+    <table class="center">
         <tr th:each="currentSession: ${currentGame.getSessions()}">
 
             <h3 th:text="${currentSession.getGameName()}"></h3>

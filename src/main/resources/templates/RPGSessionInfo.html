@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" th:src="@{/SessionScript.js}"></script>
+    <link th:href="@{css/mystylesheet.css}" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -19,7 +21,7 @@
     <input type="hidden" th:field="*{genre}" th:value="${currentSession.getGenre()}">
     <input type="hidden" th:field="*{goals}" th:value="${currentSession.getGoals()}">
 
-    <table id="questsInput">
+    <table id="questsInput" th:class="stats">
         <tr th:each="quest,status: ${currentSession.quests}" id="questRow">
 
             <input th:field = "*{quests[__${status.index}__].questName}" th:value="${quest.getQuestName()}">
@@ -29,13 +31,13 @@
         </tr>
     </table>
 
-    <input type="button" onclick="addQuestInput()" value="Add Quest">
+    <input type="button" onclick="addQuestInput()" value="Add Quest" th:class="button2">
 
     <br>
 
     <label>Please give your thoughts on this Game Session</label>
     <br>
-    <textarea th:field="*{reflection}">
+    <textarea th:field="*{reflection}" rows="5" cols="50">
 
     </textarea>
 

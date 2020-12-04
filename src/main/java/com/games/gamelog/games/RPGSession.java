@@ -1,29 +1,31 @@
 package com.games.gamelog.games;
 
 
+import com.games.gamelog.games.displays.RPGDisplay;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RPGSession extends DefaultSession{
+public class RPGSession extends DefaultSession {
 
     //Quests
     ArrayList<Quest> quests;
 
-    public RPGSession(){
-        super("", "");
+    public RPGSession() {
+        super("", "", new RPGDisplay(new ArrayList<>()));
     }
 
     public RPGSession(String gameName) {
-        super(gameName, "RPG");
+        super(gameName, "RPG", new RPGDisplay(new ArrayList<>()));
     }
 
     public RPGSession(String gameName, String genre) {
-        super(gameName, genre);
+        super(gameName, genre, new RPGDisplay(new ArrayList<>()));
     }
 
-    public RPGSession(String gameName, Date date, String goals){
-        super(gameName, "RPG");
+    public RPGSession(String gameName, Date date, String goals) {
+        super(gameName, "RPG", new RPGDisplay(new ArrayList<>()));
         setCurrentDate(date);
         setGoals(goals);
     }
@@ -36,26 +38,11 @@ public class RPGSession extends DefaultSession{
         this.quests = quests;
     }
 
-    public void addQuest(String questName, String description){
+    public void addQuest(String questName, String description) {
         Quest newQuest = new Quest(questName, description);
 
         quests.add(newQuest);
 
     }
 
-    @Override
-    public String displayInfo() {
-        String output = "Completed Quests: ";
-        for (Quest quest : this.quests){
-
-            if (quests.indexOf(quest) == quests.size()-1){
-                output += quest.getQuestName();
-                break;
-            }
-
-            output += quest.getQuestName() + " | ";
-        }
-
-        return output;
-    }
 }
