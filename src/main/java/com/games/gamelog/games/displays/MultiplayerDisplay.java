@@ -17,7 +17,7 @@ public class MultiplayerDisplay implements GameDisplays{
     @Override
     public String displayInfo() {
 
-        String output = "Areas to Improve: " + improvements + " Match stats: ";
+        String output = "Areas to Improve: " + improvements + "---- Match stats: ";
         String outcome = "";
 
         for(MultiplayerMatch match : matches){
@@ -32,7 +32,7 @@ public class MultiplayerDisplay implements GameDisplays{
                 output += "KDA: " + KDA + " - " + outcome;
                 break;
             }
-            output += "KDA " + KDA + " - " + outcome + " | ";
+            output += "KDA: " + KDA + " - " + outcome + " | ";
 
 
         }
