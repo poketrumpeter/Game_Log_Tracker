@@ -50,8 +50,11 @@
         var minutesLabel = document.getElementById("minutes");
         var secondsLabel = document.getElementById("seconds");
         var totalSeconds = 0;
+        <!--    Uses setInterval to call an iterator function every 1000 milliseconds on totalSeconds -->
         setInterval(setTime, 1000);
+        <!--    used for a possible stop timer button, decided not to implement -->
         var timedOut = false;
+        <!--    adds a zero before single digit integers in the display -->
         function pad(num) {
             var numString = num + "";
             if (numString.length <= 1) {
@@ -60,7 +63,7 @@
                 return numString;
             }
         }
-
+        <!--    sends the session time to the session object after hitting the "complete session" button -->
         function sendTime() {
             timedOut = !timedOut;
             var stringTime = totalSeconds.toString();
