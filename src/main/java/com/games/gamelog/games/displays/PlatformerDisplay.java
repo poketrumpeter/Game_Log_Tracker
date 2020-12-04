@@ -1,6 +1,6 @@
 package com.games.gamelog.games.displays;
 
-import com.games.gamelog.games.Level;
+import com.games.gamelog.games.Sessions.Level;
 
 import java.util.ArrayList;
 

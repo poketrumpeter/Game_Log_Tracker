@@ -1,4 +1,6 @@
-package com.games.gamelog.games;
+package com.games.gamelog.games.Gaming;
+
+import com.games.gamelog.games.Sessions.GameSession;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,10 @@
-package com.games.gamelog.games;
+package com.games.gamelog.games.Sessions;
 
 
 import com.games.gamelog.games.displays.RPGDisplay;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class RPGSession extends DefaultSession {
 

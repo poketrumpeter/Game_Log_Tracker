@@ -1,6 +1,6 @@
 package com.games.gamelog.games.displays;
 
-import com.games.gamelog.games.MultiplayerMatch;
+import com.games.gamelog.games.Sessions.MultiplayerMatch;
 
 import java.util.ArrayList;
 

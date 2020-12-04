@@ -1,6 +1,6 @@
 package com.games.gamelog.games.displays;
 
-import com.games.gamelog.games.Quest;
+import com.games.gamelog.games.Sessions.Quest;
 
 import java.util.ArrayList;
 

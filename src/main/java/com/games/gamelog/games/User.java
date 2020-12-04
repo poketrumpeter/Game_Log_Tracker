@@ -1,5 +1,8 @@
 package com.games.gamelog.games;
 
+import com.games.gamelog.games.Gaming.Game;
+import com.games.gamelog.games.Gaming.defaultGame;
+import com.games.gamelog.games.Sessions.GameSession;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;

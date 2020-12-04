@@ -1,4 +1,4 @@
-package com.games.gamelog.games;
+package com.games.gamelog.games.Sessions;
 
 public class Level {
 

@@ -1,10 +1,12 @@
-package com.games.gamelog.games;
+package com.games.gamelog.games.Gaming;
+
+import com.games.gamelog.games.Sessions.GameSession;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class defaultGame implements Game{
+public class defaultGame implements Game {
 
     private String name;
     private String genre;

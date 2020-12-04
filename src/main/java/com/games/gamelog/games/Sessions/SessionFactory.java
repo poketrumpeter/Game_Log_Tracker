@@ -1,6 +1,5 @@
-package com.games.gamelog.games;
+package com.games.gamelog.games.Sessions;
 
-import javax.websocket.Session;
 import java.util.Date;
 
 public class SessionFactory {
