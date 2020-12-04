@@ -19,24 +19,24 @@ Step 1) Create an empty MongoDB by executing mongod.exe
 
 Step 2) Create a Mongo terminal window by executing mongo.exe
 
-Step 3) Run the program with @Component uncommented
-
-- (Don't forget to comment it out after this first run (as noted above)! Or it will delete and repopulate the MongoDB.)
-
-Step 4) In this Mongo terminal window, type db.user.find({})
-
-Step 5) Copy one of the preset ObjectID string
-
-Step 6) Compile and run the program with IntelliJ or in terminal in project directory enter this command:
+Step 3) Compile and run the program with IntelliJ or in terminal in project directory enter this command:
 
  - For windows: mvnw spring-boot:run 
  - For MacOS/Linux: ./mvnw spring-boot:run
 
-Step 7) Navigate to " LocalHost:8080/?id="PASTE-USER-ID-HERE" " on your browser
+Step 4) In the Mongo terminal window, type db.user.find({})
+
+Step 5) Copy one of the preset ObjectID string
+
+Step 6) Navigate to " LocalHost:8080/?id="PASTE-USER-ID-HERE" " on your browser
 
 - (Paste the ObjectID string obtained from step 4 into the "PASTE-USER-ID-HERE" without quotes)
 
 Step 7) The project should be up and running on your browser! Test it out!
+
+Step 8) If restarting the program, comment out @Component in the MongoCollectionCreator
+
+- Or it will delete and repopulate the MongoDB, removing your stored information!
 
 ### System Requirements
 1. mongo and mongod installation (version 4.4)
