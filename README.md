@@ -27,7 +27,10 @@ Step 4) In this Mongo terminal window, type db.user.find({})
 
 Step 5) Copy one of the preset ObjectID string
 
-Step 6) Compile and run the program with IntelliJ
+Step 6) Compile and run the program with IntelliJ or in terminal enter this command:
+
+ - For windows: mvnw spring-boot:run 
+ - For MacOS/Linux: ./mvnw spring-boot:run
 
 Step 7) Navigate to " LocalHost:8080/?id="PASTE-USER-ID-HERE" " on your browser
 

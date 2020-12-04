@@ -1,9 +1,6 @@
 package com.games.gamelog.games;
 
 import com.games.gamelog.games.displays.MultiplayerDisplay;
-import com.games.gamelog.games.displays.PlatformerDisplay;
-import com.sun.org.apache.xpath.internal.operations.Mult;
-
 import java.util.ArrayList;
 import java.util.Date;
 
